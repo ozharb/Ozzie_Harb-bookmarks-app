@@ -72,10 +72,11 @@ function createItem(bookmark){
     });
 
 };
+
 export default {
-    getItems,
-    createItem,
-    updateItem,
-    deleteItem,
+getItems,
+createItem,
+updateItem,
+deleteItem,
     
-  };
+};
