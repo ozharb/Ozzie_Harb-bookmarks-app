@@ -11,7 +11,9 @@
     "type": "git",
     "url": "git+https://github.com/thinkful-ei-unicorn/Ozzie_Harb-bookmarks-app/tree/gh-pages"
   },
-  "keywords": ["bookmarks"],
+  "keywords": [
+    "bookmarks"
+  ],
   "author": "Ozzie Harb",
   "license": "ISC",
   "bugs": {
@@ -28,6 +30,7 @@
     "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
+    "create-react-app": "^4.0.1",
     "cuid": "^2.1.6",
     "jquery": "^3.4.1",
     "normalize.css": "^8.0.1"

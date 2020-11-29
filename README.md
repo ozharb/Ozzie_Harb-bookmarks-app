@@ -1,6 +1,6 @@
 ## Bookmark App
 
-A simple app to save and filter your favorite websites by you rate them.
+A simple app to save and filter your favorite websites by how you rate them.
 
 
 ### LookBook!
@@ -20,6 +20,8 @@ The user:
 - Receives appropriate feedback when cannot submit a bookmark.
 
 - Can select from a dropdown a "minimum rating" to filter the list by all bookmarks rated at or above the chosen selection.
+
+- Can change and save bookmark titles.
 
 #### Requires npm install and start
 
