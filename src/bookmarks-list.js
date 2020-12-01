@@ -316,7 +316,6 @@ const bindEventListeners = function () {
   handleNewItemSubmit();
   handleItemExpandClicked();
   handleDeleteItemClicked();
-  //handleEditbookmarkItemSubmit();
   handleCloseError();
   $(".main-view").on('change','#ratings', handleFilterClick);
   handleNewSubmit();
