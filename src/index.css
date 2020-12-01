@@ -17,6 +17,9 @@ h1{
   font-size: 30x;
   color: orangered;
 }
+h3{
+  margin-bottom: 5px;
+}
 footer {
   margin-top:0;
   text-align: center;
@@ -29,7 +32,8 @@ footer {
 display: flex;
 justify-content: space-between;
 }
-.rating-box>label{
+.rating-box{
+  margin-top: 5px;
   display: inline-block;
 }
 .bookmark-item__expanded{
@@ -39,6 +43,21 @@ justify-content: space-between;
 #js-new-bookmark-form > input{ 
  
   margin-bottom: 5px;
+}
+/*---Expanded View---*/
+.title-plus-Rating{
+  display: flex;
+  justify-content: space-between;
+}
+
+.js-edit-item-form > label{
+  font-size: 10px;
+  color: gray;
+  margin-bottom: 5px;
+}
+.js-edit-item-form > input{
+  width: 80%;
+  margin-bottom: 1px;
 }
 .new-bookmark-form{
   display: flex;
@@ -69,7 +88,15 @@ li{
   border: 1px solid gray;
   border-radius: 3px;
 }
-
+button, input[type="radio"] {
+  padding: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+#js-new-bookmark-form > button, input[type="text"] {
+  padding: 5px;
+  margin-bottom: 10px;
+}
 .bookmark-list {
   list-style: none;
   padding-left: 0;
@@ -93,12 +120,14 @@ body {
 }
 
 .bookmark-item {
-  display: block;
-  
+  display: flex;
   font-style: italic;
-  font-size: 20px;
+  font-size: .8em;
   margin-bottom: 15px;
+
 }
+
+
 
 
 .error-container {
@@ -123,8 +152,14 @@ input:disabled{
   border:none;
   width: 100%;
 }
+form >input{
+  padding-bottom: 20px;
+}
 
 /***--links--****/
+a {
+  font-size: .8em;
+}
 a:link {
   color: orangered;
 }
@@ -138,70 +173,22 @@ a:active{
   color: greenyellow;
 }
 /*****ratings stars have two options: hover to fill and a11y functionality*****/
-.txt-center {
-  text-align: center;
-}
-.hide {
-  display: none;
-}
-.starRadio{
-  margin: 3px;
-}
-.clear {
-  float: none;
-  clear: both;
-}
+
 
 .rating {
-   
     unicode-bidi: bidi-override;
     direction: rtl;
     text-align: center;
     position: relative;
 }
 
-.rating > label {
-   
-    display: inline;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    width: 1.5em;
-    cursor: pointer;
-    color: #000;
-}
 
-.rating > label:hover,
-.rating > label:hover ~ label,
-.rating > input.radio-btn:checked ~ label {
-    color: transparent;
-}
 
-.rating > label:hover:before,
-.rating > label:hover ~ label:before,
-.rating > input.radio-btn:checked ~ label:before,
-.rating > input.radio-btn:checked ~ label:before {
-    content: "\2605";
-    position: absolute;
-    left: 0;
-    color: #FFD700;
-}
 
-.rating > input.radio-btn:checked ~ label {
-    color: transparent;
-}
 
-.rating > label:focus:before,
-.rating > label:focus ~ label:before,
-.rating > input.radio-btn:checked ~ label:before,
-.rating > input.radio-btn:checked ~ label:before {
-    content: "\2605";
-    position: absolute;
-    left: 0;
-    color: #FFD700;
-}
+
 .starView {
-  
+  font-size: 10px;
   color: #FFD700 ;
   
 }

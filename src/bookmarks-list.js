@@ -7,28 +7,32 @@ import api from './api';
 const generateItemElement = function (item) {
   function ratingLabel (item){
     let starsView = []
-    if (item.rating > 1){
+    if (item.rating >= 1){
      
       for (let i = 0; i < item.rating; i++){
-        starsView.push(`<label type="radio" checked="checked" class="starView" >☆</label>`)
+        starsView.push(`<label class="starView" >☆</label>`)
       } 
     }
     return starsView.join(' ')
   }
   
   let itemTitle =   `
-      <form id="js-edit-item-form">
-        <input class="bookmark-item" type="text" value="${item.title}" required/>
-      </form> 
-      <div class="rating-box">
-      ${ratingLabel(item)}
+       <form class="js-edit-item-form">
+      <div class="title-plus-Rating">
+      <h3 value="${item.title}">${item.title}</h3>
+        <div class="rating-box">
+        ${ratingLabel(item)}
+        </div>
       </div>
+       </form> 
       <br>
-      <label> Visit site: <a href="${item.url}" target="new_blank">${item.url}</a>
-     </label>
-        <section class="bookmark-desc">${item.desc}</section>
-
-         <div class="bookmark-item-controls">
+      <label> Visit site:</label>
+      <a href="${item.url}" target="new_blank">${item.url}</a>
+   
+      <section class="bookmark-desc">${item.desc}</section>
+        <div class="error-container"></div>
+      
+        
         <button class="bookmark-item-toggle js-item-toggle">
           <span class="button-label">ok</span>
         </button>
@@ -40,8 +44,9 @@ const generateItemElement = function (item) {
   if (!item.expanded) {
     itemTitle = 
     `<div class="bookmark-box">
-    <span class="bookmark-item bookmark-item__expanded">${item.title}</span>
-    <div class="rating-box">${ratingLabel(item)}</div></div> `;
+    <button class="bookmark-item bookmark-item__expanded">${item.title}</button>
+    <div class="rating-box">${ratingLabel(item)}</div>
+    </div> `;
     
   }
 
@@ -49,7 +54,7 @@ const generateItemElement = function (item) {
     <li class="js-item-element" data-item-id="${item.id}">
       ${itemTitle}
       
-      </div>
+      
     </li>`;
 };
 
@@ -82,6 +87,75 @@ const handleCloseError = function (){
     renderError();
   });
 };
+//---template generation functions---//
+function generateBookmarkForm () {
+  return ` 
+  <div class="error-container"> </div>
+  <form id="js-new-bookmark-form">
+  
+  <label>Add New Bookmark:<br>
+  
+  <input type="text" name="url" class="bookmark-url-entry" placeholder="http(s)://" required><br>
+  </label>
+  <label>Bookmark Title:<br>
+  <input type="text" name="title" class="bookmark-title-entry" placeholder="max of 15 characters" maxlength="15" required>
+  </label>
+  <br>
+  <label>Rating (1-5 stars):<br></label>
+  <div class="txt-center">
+        <div class="rating">
+        
+    
+            <label>
+            <input id="star5" name="rating" type="radio" value="5" class="starRadio" />
+            5</label>
+            <label>
+            <input id="star4" name="rating" type="radio" value="4" class="starRadio" />
+            4</label>
+            <label>
+            <input id="star3" name="rating" type="radio" value="3" class="starRadio" />
+            3</label>
+            <label>
+            <input id="star2" name="rating" type="radio" value="2" class="starRadio" />
+            2</label>
+            <label>
+            <input id="star1" name="rating" type="radio" value="1" class="starRadio" />
+            1</label>
+           
+        </div>
+ 
+</div>
+
+<input type="text" name="desc" class="bookmark-description-entry" placeholder="description"><br>
+  <button class="create" type="submit">create</button>
+  <button class="cancel" type="reset">cancel</button>
+</form>`
+}
+function startForm(){
+  return `<div class="new-bookmark-form"> </div>
+  <div class = "my-bookmarks-view">
+  <header>
+<h2>My Bookmarks</h2>
+<form id="initial-view">
+<button class="initial-view-new">
+<span class="button-label">New</span>
+</button>
+<label value="drop-down"><select id="ratings" name="ratings">
+  <option> <span class="button-label"></span>Filter By</span></option>
+  <option value="1">1 star</option>
+  <option value="2">2 stars</option>
+  <option value="3">3 stars</option>
+  <option value="4">4 stars</option>
+  <option value="5">5 stars</option>
+</select>
+</label>
+</form>
+</header>
+<ul class="bookmark-list js-bookmark-list"></ul>
+  </div>`
+}
+
+//----RENDER FUNCTION---//
 
 const render = function () {
   renderError();
@@ -94,31 +168,9 @@ const render = function () {
   // render the bookmark list in the DOM
   const bookmarkListItemsString = generatebookmarkItemsString(items);
 
-  
-  
-  
   // insert that HTML into the DOM
   if (store.adding == false){
-    let html = `<div class="new-bookmark-form"> </div>
-    <div class = "my-bookmarks-view">
-    <header>
-<h2>My Bookmarks</h2>
-<form id="initial-view">
-<button class="initial-view-new">
-  <span class="button-label">New</span>
-</button>
-  <select id="ratings" name="ratings">
-    <option> <span class="button-label"></span>Filter By</span></option>
-    <option value="1">1 star</option>
-    <option value="2">2 stars</option>
-    <option value="3">3 stars</option>
-    <option value="4">4 stars</option>
-    <option value="5">5 stars</option>
-  </select>
-</form>
-</header>
-<ul class="bookmark-list js-bookmark-list"></ul>
-    </div>`
+    let html = startForm();
     $(".main-view").html(html)
   $('.js-bookmark-list').html(bookmarkListItemsString);
   } else {
@@ -194,27 +246,6 @@ const handleDeleteItemClicked = function () {
   });
 };
 
-const handleEditbookmarkItemSubmit = function () {
-  $('.main-view').on('submit','#js-edit-item-form', event => {
-    event.preventDefault();
-    const id = getItemIdFromElement(event.currentTarget);
-    const itemName = $(event.currentTarget).find('.bookmark-item').val();
- 
-    api.updateItem(id, {title:itemName})
-    
-    .then((newItem) => {
-      store.findAndUpdate(id, {title:itemName});
-      store.filter = 0;
-    render();
-  })
-    .catch((error) => {
-      console.log(error);
-      store.setError(error.message);
-      renderError();
-    })
-  })
-};
-
 const handleItemExpandClicked = function () {
   $('.main-view').on('click', '.bookmark-item__expanded', event => {
 
@@ -227,16 +258,13 @@ const handleItemExpandClicked = function () {
     
   });
 };
+
 const handleOkClicked = function () {
   $('.main-view').on('click', '.js-item-toggle', event => {
-   
-    const id = getItemIdFromElement(event.currentTarget);
-    const item = store.findById(id);
-    item.expanded = !item.expanded
-  
-    render();
-    
-    
+  const id = getItemIdFromElement(event.currentTarget);
+  const item = store.findById(id);
+  item.expanded = !item.expanded
+  render()
   });
 };
 
@@ -273,55 +301,9 @@ const handleNewSubmit = function (){
 }
 const addNewForm = function (){
   if(store.adding){
-  const newForm = ` 
-  <div class="error-container"> </div>
-  <form id="js-new-bookmark-form">
+  const html = generateBookmarkForm()
   
-  <label for="bookmark-entry">Add New Bookmark:</label><br>
-  
-  <input type="text" name="url" class="bookmark-url-entry" value="http(s)://"placeholder="e.g., Nytimes.com" required><br>
-  
-  <label for="bookmark-title-entry">Bookmark Title:</label><br>
-  <input type="text" name="title" class="bookmark-title-entry" placeholder="e.g., NYTimes" ><br>
-  <label for="bookmark-rating-entry">Rating:</label><br>
-  <div class="txt-center">
-        <div class="rating">
-        
-            <input id="star5" name="rating" type="radio" value="5" class="radio-btn hide" />
-            <label for="star5" >☆</label>
-            <input id="star4" name="rating" type="radio" value="4" class="radio-btn hide" />
-            <label for="star4" >☆</label>
-            <input id="star3" name="rating" type="radio" value="3" class="radio-btn hide" />
-            <label for="star3" >☆</label>
-            <input id="star2" name="rating" type="radio" value="2" class="radio-btn hide" />
-            <label for="star2" >☆</label>
-            <input id="star1" name="rating" type="radio" value="1" class="radio-btn hide" />
-            <label for="star1" >☆</label>
-            <div class="clear"></div>
-            
-            <input id="star5" name="rating" type="radio" value="5" class="starRadio" />
-           
-            <input id="star4" name="rating" type="radio" value="4" class="starRadio" />
-           
-            <input id="star3" name="rating" type="radio" value="3" class="starRadio" />
-            
-            <input id="star2" name="rating" type="radio" value="2" class="starRadio" />
-           
-            <input id="star1" name="rating" type="radio" value="1" class="starRadio" />
-            
-           
-        </div>
- 
-</div>
-
-<input type="text" name="desc" class="bookmark-description-entry" placeholder="description"><br>
-  <button class="create" type="submit">create</button>
-  <button class="cancel" type="reset">cancel</button>
-</form>`
-
-  
-
-  $(".new-bookmark-form").html(newForm)
+  $(".new-bookmark-form").html(html)
   
   } else {
     $(".new-bookmark-form").empty()
@@ -334,7 +316,7 @@ const bindEventListeners = function () {
   handleNewItemSubmit();
   handleItemExpandClicked();
   handleDeleteItemClicked();
-  handleEditbookmarkItemSubmit();
+  //handleEditbookmarkItemSubmit();
   handleCloseError();
   $(".main-view").on('change','#ratings', handleFilterClick);
   handleNewSubmit();
