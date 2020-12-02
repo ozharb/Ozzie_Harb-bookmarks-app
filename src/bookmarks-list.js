@@ -44,7 +44,7 @@ const generateItemElement = function (item) {
   if (!item.expanded) {
     itemTitle = 
     `<div class="bookmark-box">
-    <button class="bookmark-item bookmark-item__expanded">${item.title}</button>
+    <button class="bookmark-item bookmark-item__expanded"><span class="title-btn">${item.title}</span></button>
     <div class="rating-box">${ratingLabel(item)}</div>
     </div> `;
     
@@ -277,7 +277,6 @@ const handleFilterClick = function (){
 render()
   
 }
-
 
 const handleNewCancel = function (){
   $(".main-view").on("click", ".cancel", function(){

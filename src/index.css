@@ -26,7 +26,7 @@ footer {
   padding-bottom: 8px;
 }
 
-/*** boxes on main page where book marks appears***/
+/*** boxes on main page where bookmarks appears***/
 .bookmark-box{
 
 display: flex;
@@ -35,11 +35,14 @@ justify-content: space-between;
 .rating-box{
   margin-top: 5px;
   display: inline-block;
+  min-width: 50%;
 }
 .bookmark-item__expanded{
   color: orangered;
 }
-
+.title-btn{
+  text-align: center;
+}
 #js-new-bookmark-form > input{ 
  
   margin-bottom: 5px;
@@ -122,19 +125,13 @@ body {
 .bookmark-item {
   display: flex;
   font-style: italic;
-  font-size: .8em;
   margin-bottom: 15px;
 
-}
-
-
-
+} 
 
 .error-container {
   position: absolute;
-  color: palevioletred;
   font-weight: bold;
-  border: 1px solid plum;
   background-color: lightgray;
 }
 
@@ -158,7 +155,7 @@ form >input{
 
 /***--links--****/
 a {
-  font-size: .8em;
+  font-size: 10px;
 }
 a:link {
   color: orangered;
@@ -172,7 +169,7 @@ a:hover {
 a:active{
   color: greenyellow;
 }
-/*****ratings stars have two options: hover to fill and a11y functionality*****/
+
 
 
 .rating {
@@ -184,9 +181,6 @@ a:active{
 
 
 
-
-
-
 .starView {
   font-size: 10px;
   color: #FFD700 ;
@@ -194,7 +188,10 @@ a:active{
 }
 @media all and (min-width: 600px){
   body {
-    font-size: 1em;
+    font-size: 2em;
+  }
+  a {
+    font-size: 25px;
   }
 header{
   display: flex;
