@@ -2,6 +2,7 @@
 
 A simple app to save and filter your favorite websites by how you rate them.
 
+Link to live app: https://thinkful-ei-unicorn.github.io/Ozzie_Harb-bookmarks-app/
 
 ### LookBook!
 

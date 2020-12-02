@@ -41,7 +41,7 @@ const generateItemElement = function (item) {
         </button>
       
     `;
-  if (!item.expanded) {
+  if (!item.expanded)
     itemTitle = 
     `<div class="bookmark-box">
     <button class="bookmark-item bookmark-item__expanded">${item.title}</button>
