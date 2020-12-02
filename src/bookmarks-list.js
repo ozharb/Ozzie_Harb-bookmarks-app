@@ -44,7 +44,7 @@ const generateItemElement = function (item) {
   if (!item.expanded) {
     itemTitle = 
     `<div class="bookmark-box">
-    <button class="bookmark-item bookmark-item__expanded"><span class="title-btn">${item.title}</span></button>
+    <button class="bookmark-item bookmark-item__expanded">${item.title}</button>
     <div class="rating-box">${ratingLabel(item)}</div>
     </div> `;
     
@@ -82,7 +82,7 @@ const renderError = function (){
 };
 
 const handleCloseError = function (){
-  $('.main-view').on('click', '#cancel-error', () => {
+  $('main').on('click', '#cancel-error', () => {
     store.setError(null);
     renderError();
   });
@@ -171,7 +171,7 @@ const render = function () {
   // insert that HTML into the DOM
   if (store.adding == false){
     let html = startForm();
-    $(".main-view").html(html)
+    $("main").html(html)
   $('.js-bookmark-list').html(bookmarkListItemsString);
   } else {
     $(".my-bookmarks-view").empty()
@@ -194,7 +194,7 @@ $.fn.extend({
   });
 
 const handleNewItemSubmit = function () {
-  $('.main-view').on("submit", "#js-new-bookmark-form", event => {
+  $('main').on("submit", "#js-new-bookmark-form", event => {
      
     event.preventDefault();
   
@@ -227,7 +227,7 @@ const getItemIdFromElement = function (item) {
 
 const handleDeleteItemClicked = function () {
 
-  $(".main-view").on('click', '.js-item-delete', event => {
+  $("main").on('click', '.js-item-delete', event => {
     // get the index of the item in store.items
     const id = getItemIdFromElement(event.currentTarget);
     // delete the item
@@ -247,7 +247,7 @@ const handleDeleteItemClicked = function () {
 };
 
 const handleItemExpandClicked = function () {
-  $('.main-view').on('click', '.bookmark-item__expanded', event => {
+  $('main').on('click', '.bookmark-item__expanded', event => {
 
     const id = getItemIdFromElement(event.currentTarget);
     const item = store.findById(id);
@@ -260,7 +260,7 @@ const handleItemExpandClicked = function () {
 };
 
 const handleOkClicked = function () {
-  $('.main-view').on('click', '.js-item-toggle', event => {
+  $('main').on('click', '.js-item-toggle', event => {
   const id = getItemIdFromElement(event.currentTarget);
   const item = store.findById(id);
   item.expanded = !item.expanded
@@ -279,7 +279,7 @@ render()
 }
 
 const handleNewCancel = function (){
-  $(".main-view").on("click", ".cancel", function(){
+  $("main").on("click", ".cancel", function(){
     event.preventDefault();
    
     store.adding = false
@@ -290,7 +290,7 @@ const handleNewCancel = function (){
 }
 const handleNewSubmit = function (){
 
-  $(".main-view").on("click", ".initial-view-new", function(){
+  $("main").on("click", ".initial-view-new", function(){
     event.preventDefault();
     console.log("clicked new");
     store.adding = true
@@ -316,7 +316,7 @@ const bindEventListeners = function () {
   handleItemExpandClicked();
   handleDeleteItemClicked();
   handleCloseError();
-  $(".main-view").on('change','#ratings', handleFilterClick);
+  $("main").on('change','#ratings', handleFilterClick);
   handleNewSubmit();
   handleNewCancel();
   handleOkClicked();
