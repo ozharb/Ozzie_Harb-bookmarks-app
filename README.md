@@ -22,7 +22,6 @@ The user:
 
 - Can select from a dropdown a "minimum rating" to filter the list by all bookmarks rated at or above the chosen selection.
 
-- Can change and save bookmark titles.
 
 #### Requires npm install and start
 
