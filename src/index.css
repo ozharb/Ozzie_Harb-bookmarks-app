@@ -35,9 +35,7 @@ justify-content: space-between;
 .rating-box{
   margin-top: 5px;
 }
-.bookmark-item__expanded{
-  color: orangered;
-}
+
 .title-btn{
   text-align: center;
 }
@@ -114,17 +112,19 @@ body {
 }
 .bookmark-list > li {
   margin: 0 30px 20px 30px;
-  
   border: 1px solid grey;
-  padding: 20px;
+  padding: 10px;
   border-radius: 3px;;
 }
 
 .bookmark-item {
+  padding: 5px;
   display: flex;
   font-style: italic;
-  margin-bottom: 15px;
-
+  margin-bottom: 10px;
+  margin-top: 10px;
+  color: orangered;
+  
 } 
 
 .error-container {
@@ -208,5 +208,8 @@ header > form {
   align-self: flex-end;
   justify-content: flex-end;
 }
-
+.bookmark-item { 
+  margin-top: 10px;
+  margin-left: 10px;
+}
 }
